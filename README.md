@@ -7,7 +7,7 @@ Este repositório contém o código-fonte completo da aplicação SynchroGest, i
 ```
 synchrogest_local/
 ├── frontend/      # Código-fonte do Frontend (React)
-│   ├── nede_module/
+│   ├── node_module/
 │   ├── public/
 │   ├── src/
 │   ├── gitignore/
