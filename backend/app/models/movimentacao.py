@@ -9,7 +9,7 @@ class Movimentacao(Base):
     id = Column(Integer, primary_key=True, index=True)
     produto_id = Column(Integer, ForeignKey("produtos.id"), nullable=False)
     usuario_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
-    tipo = Column(Enum("entrada", "saida"), nullable=False)
+    tipo = Column(Enum("entrada", "saida", name='movimentacoes_enum'), nullable=False)
     quantidade = Column(Integer, nullable=False)
     data = Column(DateTime, default=datetime.utcnow)
     observacoes = Column(Text, nullable=True)

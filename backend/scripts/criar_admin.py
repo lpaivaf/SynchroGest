@@ -23,8 +23,8 @@ def criar_ou_recriar_admin():
     """
     db = SessionLocal()
     try:
-        email_admin = "admin@synchrogest.com"
-        senha_clara = "admin123"  # você pode trocar aqui, se desejar
+        email_admin = "synchro.gest@synchrogest.com"
+        senha_clara = "sgproject1"  # você pode trocar aqui, se desejar
 
         admin_existente = db.query(Usuario).filter(Usuario.email == email_admin).first()
         if admin_existente:

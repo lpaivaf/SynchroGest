@@ -11,6 +11,7 @@ import Projetos from './pages/projetos/Projetos';
 import Usuarios from './pages/auth/Usuarios';
 import Gerenciamento from './pages/gerenciamento/Gerenciamento';
 import NotFound from './pages/common/NotFound';
+import { API_URL } from './config';
 
 // Componentes de layout
 import PrivateRoute from './components/auth/PrivateRoute';
@@ -19,7 +20,7 @@ import MainLayout from './components/layout/MainLayout';
 function App() {
   // Adicionado useEffect para testar a conexão com o backend via proxy
   useEffect(() => {
-    fetch('/api/test') // Usa a URL relativa que o proxy deve interceptar
+    fetch(`${API_URL}/api/test`) // Usa a URL relativa que o proxy deve interceptar
       .then(res => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);

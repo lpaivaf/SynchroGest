@@ -10,7 +10,7 @@ class Usuario(Base):
     nome = Column(String(100), nullable=False)
     email = Column(String(100), unique=True, nullable=False, index=True)
     senha_hash = Column(String(255), nullable=False)
-    nivel_acesso = Column(Enum("admin", "usuario", "visualizacao"), default="usuario")
+    nivel_acesso = Column(Enum("admin", "usuario", "visualizacao", name='usuarios_enum'), default="usuario")
     ativo = Column(Boolean, default=True)
     data_criacao = Column(DateTime, default=datetime.utcnow)
     ultimo_login = Column(DateTime, nullable=True)

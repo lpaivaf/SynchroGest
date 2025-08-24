@@ -2,7 +2,7 @@ from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-senha_plana = "admin123"  # <-- altere se quiser
+senha_plana = "sgproject1"  # <-- altere se quiser
 hash_senha = pwd_context.hash(senha_plana)
 
 print("Senha:", senha_plana)
