@@ -14,11 +14,11 @@ router = APIRouter()
 async def listar_usuarios(
     skip: int = 0, 
     limit: int = 100, 
-    current_user: Usuario = Depends(check_admin_user),
+    current_user: Usuario = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """
-    Lista todos os usuários (apenas para administradores)
+    Lista todos os usuários (qualquer usuário autenticado)
     """
     usuarios = db.query(Usuario).offset(skip).limit(limit).all()
     return usuarios

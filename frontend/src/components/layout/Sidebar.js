@@ -14,50 +14,50 @@ const Sidebar = () => {
   return (
     <Nav className="flex-column bg-light sidebar" style={{ height: '100vh', position: 'fixed', top: 0, left: 0, paddingTop: '56px', width: '250px' }}>
       {/* Usar NavLink em vez de LinkContainer */}
-      <Nav.Link 
-        as={NavLink} 
-        to="/dashboard" 
+      <Nav.Link
+        as={NavLink}
+        to="/dashboard"
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}
       >
         <FaTachometerAlt className="me-2" /> Dashboard
       </Nav.Link>
-      <Nav.Link 
-        as={NavLink} 
-        to="/categorias" 
+      <Nav.Link
+        as={NavLink}
+        to="/categorias"
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}
       >
         <FaTags className="me-2" /> Categorias
       </Nav.Link>
-      <Nav.Link 
-        as={NavLink} 
-        to="/produtos" 
+      <Nav.Link
+        as={NavLink}
+        to="/produtos"
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}
       >
         <FaBoxOpen className="me-2" /> Produtos
       </Nav.Link>
-      <Nav.Link 
-        as={NavLink} 
-        to="/movimentacoes" 
+      <Nav.Link
+        as={NavLink}
+        to="/movimentacoes"
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}
       >
         <FaExchangeAlt className="me-2" /> Movimentações
       </Nav.Link>
-      <Nav.Link 
-        as={NavLink} 
-        to="/projetos" 
+      <Nav.Link
+        as={NavLink}
+        to="/projetos"
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}
       >
         <FaProjectDiagram className="me-2" /> Projetos
       </Nav.Link>
       {/* Adicionar link para usuários se o usuário for admin - lógica a ser implementada */}
-      <Nav.Link 
-        as={NavLink} 
-        to="/usuarios" 
+      <Nav.Link
+        as={NavLink}
+        to="/usuarios"
         className="d-flex align-items-center"
         style={({ isActive }) => isActive ? activeStyle : undefined}
       >

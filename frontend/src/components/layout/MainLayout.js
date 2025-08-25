@@ -69,19 +69,19 @@ const MainLayout = ({ children }) => {
               to="/produtos"
               className={`mb-2 ${isActive('/produtos') ? 'active' : ''}`}
             >
-              <FaBox className="me-2" /> Produtos
-            </Nav.Link>
-            <Nav.Link
-              as={Link}
-              to="/categorias"
-              className={`mb-2 ${isActive('/categorias') ? 'active' : ''}`}
-            >
               <FaTags className="me-2" /> Categorias
             </Nav.Link>
             <Nav.Link
               as={Link}
               to="/movimentacoes"
               className={`mb-2 ${isActive('/movimentacoes') ? 'active' : ''}`}
+            >
+              <FaBox className="me-2" /> Produtos
+            </Nav.Link>
+            <Nav.Link
+              as={Link}
+              to="/categorias"
+              className={`mb-2 ${isActive('/categorias') ? 'active' : ''}`}
             >
               <FaChartLine className="me-2" /> Movimentações
             </Nav.Link>

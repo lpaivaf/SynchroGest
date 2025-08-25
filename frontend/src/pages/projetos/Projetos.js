@@ -10,7 +10,7 @@ const Projetos = () => {
   const [produtos, setProdutos] = useState([]); // Para adicionar produtos ao projeto
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Estado do Modal Principal (Criar/Editar Projeto)
   const [showProjetoModal, setShowProjetoModal] = useState(false);
   const [projetoAtual, setProjetoAtual] = useState(null); // Para edição
@@ -62,7 +62,7 @@ const Projetos = () => {
       if (filtroResponsavel) params.responsavel_id = filtroResponsavel;
       if (filtroDataInicio) params.data_inicio = filtroDataInicio;
       if (filtroDataFim) params.data_fim = filtroDataFim;
-      
+
       const response = await api.get('/projetos/', { params });
       setProjetos(response.data);
     } catch (err) {
@@ -83,7 +83,7 @@ const Projetos = () => {
       console.error(err);
     }
   };
-  
+
   const fetchProdutos = async () => {
     try {
       const response = await api.get('/produtos/', { params: { limit: 1000 } });
@@ -98,24 +98,24 @@ const Projetos = () => {
     setDetalhesLoading(true);
     setDetalhesError(null);
     try {
-        const response = await api.get(`/projetos/${id}`);
-        // Mapear colaboradores para incluir nome
-        const colaboradoresComNome = response.data.colaboradores.map(colab => {
-            const usuario = usuarios.find(u => u.id === colab.usuario_id);
-            return { ...colab, nome: usuario ? usuario.nome : 'Usuário não encontrado' };
-        });
-        // Mapear produtos para incluir nome
-        const produtosComNome = response.data.produtos.map(prodProj => {
-            const produto = produtos.find(p => p.id === prodProj.produto_id);
-            return { ...prodProj, nome: produto ? produto.nome : 'Produto não encontrado' };
-        });
-        setProjetoDetalhes({ ...response.data, colaboradores: colaboradoresComNome, produtos: produtosComNome });
+      const response = await api.get(`/projetos/${id}`);
+      // Mapear colaboradores para incluir nome
+      const colaboradoresComNome = response.data.colaboradores.map(colab => {
+        const usuario = usuarios.find(u => u.id === colab.usuario_id);
+        return { ...colab, nome: usuario ? usuario.nome : 'Usuário não encontrado' };
+      });
+      // Mapear produtos para incluir nome
+      const produtosComNome = response.data.produtos.map(prodProj => {
+        const produto = produtos.find(p => p.id === prodProj.produto_id);
+        return { ...prodProj, nome: produto ? produto.nome : 'Produto não encontrado' };
+      });
+      setProjetoDetalhes({ ...response.data, colaboradores: colaboradoresComNome, produtos: produtosComNome });
     } catch (err) {
-        setDetalhesError('Erro ao buscar detalhes do projeto.');
-        toast.error('Erro ao buscar detalhes do projeto.');
-        console.error(err);
+      setDetalhesError('Erro ao buscar detalhes do projeto.');
+      toast.error('Erro ao buscar detalhes do projeto.');
+      console.error(err);
     } finally {
-        setDetalhesLoading(false);
+      setDetalhesLoading(false);
     }
   };
 
@@ -179,9 +179,9 @@ const Projetos = () => {
       return;
     }
     if (!dataToSave.data_inicio) {
-        setProjetoModalError('Data de início é obrigatória.');
-        setProjetoModalLoading(false);
-        return;
+      setProjetoModalError('Data de início é obrigatória.');
+      setProjetoModalLoading(false);
+      return;
     }
 
     try {
@@ -264,15 +264,15 @@ const Projetos = () => {
   const handleRemoveColaborador = async (usuarioId) => {
     if (!projetoDetalhes) return;
     if (window.confirm('Tem certeza que deseja remover este colaborador do projeto?')) {
-        try {
-            await api.delete(`/projetos/${projetoDetalhes.id}/colaboradores/${usuarioId}`);
-            toast.success('Colaborador removido com sucesso!');
-            fetchProjetoDetalhes(projetoDetalhes.id); // Atualiza detalhes
-        } catch (err) {
-            const errorMsg = err.response?.data?.detail || 'Erro ao remover colaborador.';
-            toast.error(`Erro: ${errorMsg}`);
-            console.error(err);
-        }
+      try {
+        await api.delete(`/projetos/${projetoDetalhes.id}/colaboradores/${usuarioId}`);
+        toast.success('Colaborador removido com sucesso!');
+        fetchProjetoDetalhes(projetoDetalhes.id); // Atualiza detalhes
+      } catch (err) {
+        const errorMsg = err.response?.data?.detail || 'Erro ao remover colaborador.';
+        toast.error(`Erro: ${errorMsg}`);
+        console.error(err);
+      }
     }
   };
 
@@ -295,10 +295,10 @@ const Projetos = () => {
     setProdutoModalLoading(true);
     setProdutoModalError(null);
     try {
-      await api.post(`/projetos/${projetoDetalhes.id}/produtos`, { 
-          produto_id: parseInt(produtoId, 10),
-          quantidade: parseInt(produtoQuantidade, 10),
-          observacao: produtoObservacao
+      await api.post(`/projetos/${projetoDetalhes.id}/produtos`, {
+        produto_id: parseInt(produtoId, 10),
+        quantidade: parseInt(produtoQuantidade, 10),
+        observacao: produtoObservacao
       });
       toast.success('Produto adicionado ao projeto com sucesso!');
       fetchProjetoDetalhes(projetoDetalhes.id); // Atualiza detalhes
@@ -316,27 +316,27 @@ const Projetos = () => {
   const handleRemoveProduto = async (produtoId) => {
     if (!projetoDetalhes) return;
     if (window.confirm('Tem certeza que deseja remover este produto do projeto?')) {
-        try {
-            await api.delete(`/projetos/${projetoDetalhes.id}/produtos/${produtoId}`);
-            toast.success('Produto removido do projeto com sucesso!');
-            fetchProjetoDetalhes(projetoDetalhes.id); // Atualiza detalhes
-        } catch (err) {
-            const errorMsg = err.response?.data?.detail || 'Erro ao remover produto do projeto.';
-            toast.error(`Erro: ${errorMsg}`);
-            console.error(err);
-        }
+      try {
+        await api.delete(`/projetos/${projetoDetalhes.id}/produtos/${produtoId}`);
+        toast.success('Produto removido do projeto com sucesso!');
+        fetchProjetoDetalhes(projetoDetalhes.id); // Atualiza detalhes
+      } catch (err) {
+        const errorMsg = err.response?.data?.detail || 'Erro ao remover produto do projeto.';
+        toast.error(`Erro: ${errorMsg}`);
+        console.error(err);
+      }
     }
   };
-  
+
   // Função para formatar data
   const formatDate = (dateString) => {
-      if (!dateString) return 'N/A';
-      try {
-          const date = new Date(dateString + 'T00:00:00'); // Adiciona T00:00:00 para evitar problemas de fuso horário
-          return date.toLocaleDateString('pt-BR');
-      } catch (e) {
-          return 'Data inválida';
-      }
+    if (!dateString) return 'N/A';
+    try {
+      const date = new Date(dateString + 'T00:00:00'); // Adiciona T00:00:00 para evitar problemas de fuso horário
+      return date.toLocaleDateString('pt-BR');
+    } catch (e) {
+      return 'Data inválida';
+    }
   };
 
   return (
@@ -347,7 +347,7 @@ const Projetos = () => {
 
       {/* Filtros */}
       <Row className="mb-3 p-3 border rounded bg-light">
-        <Col md={12} className="mb-2"><FaFilter className="me-1"/> Filtros:</Col>
+        <Col md={12} className="mb-2"><FaFilter className="me-1" /> Filtros:</Col>
         <Col md={3} sm={6} className="mb-2">
           <Form.Group controlId="filtroStatus">
             <Form.Label>Status</Form.Label>
@@ -375,17 +375,17 @@ const Projetos = () => {
           <Form.Group controlId="filtroDataInicio">
             <Form.Label>Data Início (a partir de)</Form.Label>
             <InputGroup>
-                <FormControl type="date" value={filtroDataInicio} onChange={(e) => setFiltroDataInicio(e.target.value)} />
-                <InputGroup.Text><FaCalendarAlt /></InputGroup.Text>
+              <FormControl type="date" value={filtroDataInicio} onChange={(e) => setFiltroDataInicio(e.target.value)} />
+              <InputGroup.Text><FaCalendarAlt /></InputGroup.Text>
             </InputGroup>
           </Form.Group>
         </Col>
         <Col md={3} sm={6} className="mb-2">
           <Form.Group controlId="filtroDataFim">
             <Form.Label>Data Fim (até)</Form.Label>
-             <InputGroup>
-                <FormControl type="date" value={filtroDataFim} onChange={(e) => setFiltroDataFim(e.target.value)} />
-                <InputGroup.Text><FaCalendarAlt /></InputGroup.Text>
+            <InputGroup>
+              <FormControl type="date" value={filtroDataFim} onChange={(e) => setFiltroDataFim(e.target.value)} />
+              <InputGroup.Text><FaCalendarAlt /></InputGroup.Text>
             </InputGroup>
           </Form.Group>
         </Col>
@@ -469,7 +469,7 @@ const Projetos = () => {
                 </Form.Group>
               </Col>
               <Col md={6}>
-                 <Form.Group className="mb-3" controlId="formProjetoResponsavel">
+                <Form.Group className="mb-3" controlId="formProjetoResponsavel">
                   <Form.Label>Responsável</Form.Label>
                   <Form.Select name="responsavel_id" value={projetoFormData.responsavel_id} onChange={handleProjetoFormChange} required>
                     <option value="">Selecione...</option>
@@ -552,12 +552,12 @@ const Projetos = () => {
                   </Card.Body>
                 </Card>
               </Col>
-              
+
               {/* Colaboradores */}
               <Col md={6} className="mb-3">
                 <Card>
                   <Card.Header className="d-flex justify-content-between align-items-center">
-                    <span><FaUsers className="me-1"/> Colaboradores</span>
+                    <span><FaUsers className="me-1" /> Colaboradores</span>
                     <Button variant="outline-primary" size="sm" onClick={handleShowColaboradorModal}><FaPlus /> Adicionar</Button>
                   </Card.Header>
                   <ListGroup variant="flush">
@@ -579,7 +579,7 @@ const Projetos = () => {
               <Col md={6} className="mb-3">
                 <Card>
                   <Card.Header className="d-flex justify-content-between align-items-center">
-                    <span><FaBoxOpen className="me-1"/> Produtos</span>
+                    <span><FaBoxOpen className="me-1" /> Produtos</span>
                     <Button variant="outline-primary" size="sm" onClick={handleShowProdutoModal}><FaPlus /> Adicionar</Button>
                   </Card.Header>
                   <ListGroup variant="flush">
@@ -589,8 +589,8 @@ const Projetos = () => {
                       projetoDetalhes.produtos.map(prodProj => (
                         <ListGroup.Item key={prodProj.id} className="d-flex justify-content-between align-items-center">
                           <div>
-                            {prodProj.nome} (ID: {prodProj.produto_id}) <br/>
-                            <small>Qtd: {prodProj.quantidade} {produtos.find(p => p.id === prodProj.produto_id)?.unidade_medida || ''}</small><br/>
+                            {prodProj.nome} (ID: {prodProj.produto_id}) <br />
+                            <small>Qtd: {prodProj.quantidade} {produtos.find(p => p.id === prodProj.produto_id)?.unidade_medida || ''}</small><br />
                             {prodProj.observacao && <small>Obs: {prodProj.observacao}</small>}
                           </div>
                           <Button variant="outline-danger" size="sm" onClick={() => handleRemoveProduto(prodProj.produto_id)}><FaTrash /></Button>
