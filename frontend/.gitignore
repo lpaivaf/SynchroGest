@@ -211,3 +211,6 @@ scripts/criar_admin.py
 scripts/check_admin_db.py
 app/gerar_hash.py
 initial_data.py
+
+# Ignorar dependências
+node_modules
