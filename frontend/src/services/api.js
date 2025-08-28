@@ -8,6 +8,12 @@ const api = axios.create({
   withCredentials: true  // Importante para preservar cookies em redirecionamentos
 });
 
+// const api = axios.create({
+//   baseURL: process.env.REACT_APP_API_URL || '/api',
+//   maxRedirects: 5,
+//   withCredentials: true
+// });
+
 // Preserva cabeçalhos em redirecionamentos
 api.defaults.maxRedirects = 5;
 api.defaults.withCredentials = true;
